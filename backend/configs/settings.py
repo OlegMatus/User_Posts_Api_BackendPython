@@ -10,34 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+
 from pathlib import Path
-
 from .extra_conf import *
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
+ # Додано для перевірки
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG')=='True'
@@ -60,7 +45,8 @@ INSTALLED_APPS = [
     # my_apps
     'core',
     'apps.auth',
-    'apps.user'
+    'apps.user',
+    'apps.posts'
 ]
 
 SIMPLE_JWT = {

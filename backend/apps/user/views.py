@@ -19,20 +19,20 @@ from apps.user.services import UserService
 UserModel = get_user_model()
 
 
-class UserListCreateView(ListCreateAPIView):
+class UserListCreateApiView(ListCreateAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
     filterset_class = UserFilter
     permission_classes = [AllowAny]
 
 
-class UserDestroyView(DestroyAPIView):
+class UserDestroyApiView(DestroyAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer()
     permission_classes = [IsAuthenticated]
 
 
-class UserSearchByView(APIView):
+class UserSearchByApiView(APIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
