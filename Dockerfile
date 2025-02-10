@@ -12,18 +12,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     DEBIAN_FRONTEND=noninteractive \
     COLUMNS=80
 
-RUN apk update && apk add --no-cache gcc musl-dev mariadb-dev curl ca-certificates && update-ca-certificates
-RUN apk add --no-cache \
-    gdal \
-    gdal-dev \
-    python3-dev \
-    build-base \
-    bash \
-    libmagic \
-    geos \
-    geos-dev
+RUN apk update && apk add --no-cache \
+    gcc musl-dev mariadb-dev curl ca-certificates \
+    gdal gdal-dev python3-dev build-base bash libmagic geos geos-dev \
+    && update-ca-certificates \
 
 RUN pip install --no-cache-dir gdal
+
 RUN mkdir /app
 WORKDIR /app
 

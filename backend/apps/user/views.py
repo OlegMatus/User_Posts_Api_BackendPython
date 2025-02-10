@@ -1,9 +1,11 @@
-from functools import partial
+import os
 
 from django.contrib.auth import get_user_model
+from django.core.mail import EmailMultiAlternatives, send_mail
+from django.http import JsonResponse
+from django.template.loader import get_template
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, DestroyAPIView, RetrieveAPIView, UpdateAPIView, \
-    RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView

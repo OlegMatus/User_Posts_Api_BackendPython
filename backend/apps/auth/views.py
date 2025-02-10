@@ -2,40 +2,20 @@ import uuid
 
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
-from rest_framework.generics import CreateAPIView, GenericAPIView, get_object_or_404
+from rest_framework.generics import GenericAPIView, get_object_or_404
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 
-from backend.apps.user.models import UserSessionModel
-from backend.apps.user.serializers import UserSerializer
-from backend.core.services.jwt_service import JWTService
+from apps.user.models import UserSessionModel
+from apps.user.serializers import UserSerializer
+from core.services.jwt_service import JWTService
 
-from apps.auth.serializers import RegisterSerializer
 from core.services.jwt_service import ActivateToken
 
 UserModel = get_user_model()
-
-
-class RegisterView(CreateAPIView):
-    serializer_class = RegisterSerializer
-    permission_classes = (AllowAny,)
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-
-        refresh = RefreshToken.for_user(user=user)
-        access = str(refresh.access_token)
-
-        return Response({
-            "user": serializer.data,
-            "access": access,
-            "refresh": str(refresh)
-        }, status=status.HTTP_201_CREATED)
 
 
 class ActivateUserView(GenericAPIView):
