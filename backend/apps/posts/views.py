@@ -1,6 +1,6 @@
 from django.http import Http404
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.pagination import PageNumberPagination
+from core.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from apps.posts.models import PostModel
@@ -13,12 +13,11 @@ class PostListApiView(ListAPIView):
     permission_classes = [AllowAny]
     pagination_class = PageNumberPagination
 
-    
-
 
 class UserPostListApiView(ListAPIView):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         return PostModel.objects.filter(user=self.request.user)
