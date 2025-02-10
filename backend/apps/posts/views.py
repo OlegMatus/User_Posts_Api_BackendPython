@@ -13,6 +13,8 @@ class PostListApiView(ListAPIView):
     permission_classes = [AllowAny]
     pagination_class = PageNumberPagination
 
+    
+
 
 class UserPostListApiView(ListAPIView):
     serializer_class = PostSerializer
